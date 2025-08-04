@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Receitas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .recipe {
+            border-bottom: 2px solid #eee;
+            padding: 20px 0;
+        }
+        .recipe:last-child {
+            border-bottom: none;
+        }
+        .recipe h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .ingredients, .instructions {
+            margin: 10px 0;
+        }
+        .ingredients ul, .instructions ul {
+            padding-left: 20px;
+        }
+        .recipe img {
+            max-width: 100%;
+            height: auto;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Receitas Deliciosas</h1>
+</header>
+
+<div class="container">
+    <div class="recipe">
+        <h2>Pizza Margherita</h2>
+        <img src="https://via.placeholder.com/600x400" alt="Pizza Margherita">
+        <div class="ingredients">
+            <h3>Ingredientes:</h3>
+            <ul>
+                <li>1 massa de pizza pronta</li>
+                <li>200g de molho de tomate</li>
+                <li>200g de queijo mussarela</li>
+                <li>Folhas de manjericão a gosto</li>
+                <li>Azeite de oliva para regar</li>
+                <li>Sal e pimenta a gosto</li>
+            </ul>
+        </div>
+        <div class="instructions">
+            <h3>Modo de Preparo:</h3>
+            <ul>
+                <li>Preaqueça o forno a 220°C.</li>
+                <li>Espalhe o molho de tomate sobre a massa de pizza.</li>
+                <li>Adicione o queijo mussarela e distribua as folhas de manjericão.</li>
+                <li>Regue com azeite de oliva e tempere com sal e pimenta.</li>
+                <li>Leve ao forno por cerca de 15 minutos ou até que a pizza esteja dourada.</li>
+                <li>Sirva quente e aproveite!</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="recipe">
+        <h2>Bolo de Chocolate</h2>
+        <img src="https://via.placeholder.com/600x400" alt="Bolo de Chocolate">
+        <div class="ingredients">
+            <h3>Ingredientes:</h3>
+            <ul>
+                <li>2 xícaras de farinha de trigo</li>
+                <li>1 xícara de açúcar</li>
+                <li>1/2 xícara de cacau em pó</li>
+                <li>1 colher de sopa de fermento em pó</li>
+                <li>1/2 xícara de leite</li>
+                <li>3 ovos</li>
+                <li>1/2 xícara de óleo</li>
+                <li>1 colher de chá de essência de baunilha</li>
+                <li>1 xícara de água fervente</li>
+            </ul>
+        </div>
+        <div class="instructions">
+            <h3>Modo de Preparo:</h3>
+            <ul>
+                <li>Preaqueça o forno a 180°C e unte uma fo'rma de 20cm com manteiga e farinha.</li>
+                <li>Em uma tigela, misture os ingredientes secos: farinha, açúcar, cacau e fermento.</li>
+                <li>Adicione os ovos, leite, óleo e essência de baunilha, e misture até obter uma massa homogênea.</li>
+                <li>Por fim, acrescente a água fervente e mexa bem. A massa ficará bem líquida.</li>
+                <li>Despeje a massa na forma e leve ao forno por cerca de 35-40 minutos ou até que, ao inserir um palito, ele saia limpo.</li>
+                <li>Deixe esfriar e desenforme. Sirva com cobertura de chocolate, se desejar.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2025 Receitas Deliciosas. Todos os direitos reservados.</p>
+</footer>
+
+</body>
+</html>
