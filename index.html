@@ -4,85 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Busca de Filmes</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
 
-        .search-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 100%;
-            max-width: 500px;
-        }
+    <!-- Fonte moderna Orbitron -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
 
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
+    <!-- Ícones Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        .search-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .search-input {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        .search-button {
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            background-color: #007bff;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .search-button:hover {
-            background-color: #0056b3;
-        }
-
-        .results-container {
-            margin-top: 20px;
-            text-align: left;
-        }
-
-        .movie-card {
-            background-color: #e9e9e9;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-
-        .movie-card img {
-            max-width: 100px;
-            margin-right: 15px;
-            float: left;
-        }
-    </style>
+    <!-- Estilo personalizado -->
+    <link rel="stylesheet" href="site.css">
 </head>
 <body>
     <div class="search-container">
-        <h1>Busca de Filmes</h1>
+        <h1><i class="fas fa-film"></i> Busca de Filmes</h1>
         <form id="search-form" class="search-form">
             <input type="text" id="search-input" class="search-input" placeholder="Digite o nome do filme..." required>
             <button type="submit" class="search-button">Buscar</button>
@@ -92,35 +26,32 @@
     <div class="results-container" id="results"></div>
 
     <script>
-        const apiKey = '90b827a4'; // Substitua por sua chave de API OMDB
+        const apiKey = '90b827a4'; // Substitua pela sua própria chave da OMDB se necessário
 
         document.getElementById('search-form').addEventListener('submit', function(event) {
-            // Previne o comportamento padrão do formulário (recarregar a página)
             event.preventDefault();
-
-            // Pega o valor do campo de busca
             const query = document.getElementById('search-input').value;
 
             if (query) {
-                // Chama a API do OMDB para buscar o filme
                 fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(query)}&apikey=${apiKey}`)
                     .then(response => response.json())
                     .then(data => {
                         const resultsDiv = document.getElementById('results');
-                        resultsDiv.innerHTML = ''; // Limpa os resultados anteriores
+                        resultsDiv.innerHTML = '';
 
                         if (data.Response === 'True') {
-                            // Exibe o título do filme e outras informações
                             const movieCard = document.createElement('div');
                             movieCard.classList.add('movie-card');
                             movieCard.innerHTML = `
-                                <img src="${data.Poster !== 'N/A' ? data.Poster : 'https://via.placeholder.com/100x150?text=Sem+Imagem'}" alt="${data.Title}">
-                                <p><strong>Nome do Filme:</strong> ${data.Title}</p>
-                                <p><strong>Ano:</strong> ${data.Year}</p>
-                                <p><strong>Gênero:</strong> ${data.Genre}</p>
-                                <p><strong>Diretor:</strong> ${data.Director}</p>
-                                <p><strong>Atores:</strong> ${data.Actors}</p>
-                                <p><strong>Descrição:</strong> ${data.Plot}</p>
+                                <img src="${data.Poster !== 'N/A' ? data.Poster : 'https://via.placeholder.com/140x210?text=Sem+Imagem'}" alt="${data.Title}">
+                                <div class="movie-details">
+                                    <p><strong>Nome do Filme:</strong> ${data.Title}</p>
+                                    <p><strong>Ano:</strong> ${data.Year}</p>
+                                    <p><strong>Gênero:</strong> ${data.Genre}</p>
+                                    <p><strong>Diretor:</strong> ${data.Director}</p>
+                                    <p><strong>Atores:</strong> ${data.Actors}</p>
+                                    <p><strong>Descrição:</strong> ${data.Plot}</p>
+                                </div>
                             `;
                             resultsDiv.appendChild(movieCard);
                         } else {
@@ -129,8 +60,7 @@
                     })
                     .catch(error => {
                         console.error('Erro ao buscar o filme:', error);
-                        const resultsDiv = document.getElementById('results');
-                        resultsDiv.innerHTML = '<p>Ocorreu um erro ao buscar o filme. Tente novamente mais tarde.</p>';
+                        document.getElementById('results').innerHTML = '<p>Ocorreu um erro ao buscar o filme. Tente novamente mais tarde.</p>';
                     });
             }
         });
