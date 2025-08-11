@@ -72,6 +72,12 @@
             border-radius: 4px;
             margin-bottom: 10px;
         }
+
+        .movie-card img {
+            max-width: 100px;
+            margin-right: 15px;
+            float: left;
+        }
     </style>
 </head>
 <body>
@@ -86,6 +92,8 @@
     <div class="results-container" id="results"></div>
 
     <script>
+        const apiKey = '90b827a4'; // Substitua por sua chave de API OMDB
+
         document.getElementById('search-form').addEventListener('submit', function(event) {
             // Previne o comportamento padrão do formulário (recarregar a página)
             event.preventDefault();
@@ -93,21 +101,37 @@
             // Pega o valor do campo de busca
             const query = document.getElementById('search-input').value;
 
-            // Simula a busca e exibe o resultado
             if (query) {
-                // Aqui você faria a chamada real para uma API de filmes (ex: OMDB, TMDb)
-                // Por enquanto, apenas um alerta para demonstrar que o script está funcionando
-                alert(`Buscando por: "${query}"...`);
+                // Chama a API do OMDB para buscar o filme
+                fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(query)}&apikey=${apiKey}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const resultsDiv = document.getElementById('results');
+                        resultsDiv.innerHTML = ''; // Limpa os resultados anteriores
 
-                // Exemplo de como você poderia exibir resultados (esse código não é funcional sem uma API real)
-                const resultsDiv = document.getElementById('results');
-                resultsDiv.innerHTML = `<h2>Resultados para "${query}"</h2>`;
-                
-                // Exemplo de um "cartão" de filme
-                const movieCard = document.createElement('div');
-                movieCard.classList.add('movie-card');
-                movieCard.innerHTML = `<p><strong>Nome do Filme:</strong> ${query}</p><p><strong>Ano:</strong> 2025</p>`;
-                resultsDiv.appendChild(movieCard);
+                        if (data.Response === 'True') {
+                            // Exibe o título do filme e outras informações
+                            const movieCard = document.createElement('div');
+                            movieCard.classList.add('movie-card');
+                            movieCard.innerHTML = `
+                                <img src="${data.Poster !== 'N/A' ? data.Poster : 'https://via.placeholder.com/100x150?text=Sem+Imagem'}" alt="${data.Title}">
+                                <p><strong>Nome do Filme:</strong> ${data.Title}</p>
+                                <p><strong>Ano:</strong> ${data.Year}</p>
+                                <p><strong>Gênero:</strong> ${data.Genre}</p>
+                                <p><strong>Diretor:</strong> ${data.Director}</p>
+                                <p><strong>Atores:</strong> ${data.Actors}</p>
+                                <p><strong>Descrição:</strong> ${data.Plot}</p>
+                            `;
+                            resultsDiv.appendChild(movieCard);
+                        } else {
+                            resultsDiv.innerHTML = `<p>Nenhum filme encontrado para "${query}".</p>`;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao buscar o filme:', error);
+                        const resultsDiv = document.getElementById('results');
+                        resultsDiv.innerHTML = '<p>Ocorreu um erro ao buscar o filme. Tente novamente mais tarde.</p>';
+                    });
             }
         });
     </script>
