@@ -60,15 +60,56 @@
         .search-button:hover {
             background-color: #0056b3;
         }
+
+        .results-container {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .movie-card {
+            background-color: #e9e9e9;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="search-container">
         <h1>Busca de Filmes</h1>
-        <form class="search-form">
-            <input type="text" class="search-input" placeholder="Digite o nome do filme..." required>
+        <form id="search-form" class="search-form">
+            <input type="text" id="search-input" class="search-input" placeholder="Digite o nome do filme..." required>
             <button type="submit" class="search-button">Buscar</button>
         </form>
     </div>
+
+    <div class="results-container" id="results"></div>
+
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function(event) {
+            // Previne o comportamento padrão do formulário (recarregar a página)
+            event.preventDefault();
+
+            // Pega o valor do campo de busca
+            const query = document.getElementById('search-input').value;
+
+            // Simula a busca e exibe o resultado
+            if (query) {
+                // Aqui você faria a chamada real para uma API de filmes (ex: OMDB, TMDb)
+                // Por enquanto, apenas um alerta para demonstrar que o script está funcionando
+                alert(`Buscando por: "${query}"...`);
+
+                // Exemplo de como você poderia exibir resultados (esse código não é funcional sem uma API real)
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = `<h2>Resultados para "${query}"</h2>`;
+                
+                // Exemplo de um "cartão" de filme
+                const movieCard = document.createElement('div');
+                movieCard.classList.add('movie-card');
+                movieCard.innerHTML = `<p><strong>Nome do Filme:</strong> ${query}</p><p><strong>Ano:</strong> 2025</p>`;
+                resultsDiv.appendChild(movieCard);
+            }
+        });
+    </script>
 </body>
 </html>
